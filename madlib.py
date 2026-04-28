@@ -1,8 +1,20 @@
-adj = input("Adjective:")
-verb1 = input("Verb:")
-verb2 = input("Verb:")
-famous_person = input("Famous Person:")
+# A simple Mad Libs game in Python
 
-madlib = f"Computer Programming is so {adj}! It makes me so excited all the time because \ I love to {verb1}. Stay hydrated and {verb2} like you are {famous_person}!"
+print("Welcome to the Python Mad Libs Generator!")
 
-print(madlib)
+# Get input from the user for different parts of speech
+noun = input("Enter a noun: ")
+verb = input("Enter a verb: ")
+adjective = input("Enter an adjective: ")
+place = input("Enter a place: ")
+
+# Create the story using f-string formatting
+story = f"""
+Today I went to the {adjective} {place}. 
+I saw a {noun} trying to {verb}. 
+It was the most unforgettable day ever!
+"""
+
+# Print the final story
+print("\\nHere is your Mad Lib story:")
+print(story)

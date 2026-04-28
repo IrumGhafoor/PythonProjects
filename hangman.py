@@ -1,19 +1,62 @@
-import random
-import string
+#Python Project 3: Hangman Game
 
-words = ["PYTHON", "DEVELOPER", "PROGRAMMING", "HANGMAN", "COMPUTER"]
+#Hangman game is a classic word game 
+#How this whole game works:
+#The program randomly selects a word from a list of secret words
+#the player has limited chances to guess the word
+#when a correct letter is guessed, it is revelead in its correct position
+#the player wins if all letters are guessed before running out of chances
 
-def get_valid_word(words):
-    word = random.choice(words)  # randomly chooses something from the list
-    while '-' in word or ' ' in word:
-        word = random.choice(words)
-    return word
+import random 
+from collections import Counter 
 
-def hangman():
-    word = get_valid_word(words)
-    word_letters = set(word)  # letters in the word
-    alphabet = set(string.ascii_uppercase)
-    used_letters = set()  # what the user has guessed
+words = '''kiwi mango apple banana strawberr coconut cherry'''
+words = words.split('')
 
-user_input = input("Type something:")
-print(user_input)
+word = random.choice(words)
+
+if __name__ == '__main__':
+    print('Guess the word! HINT: Word is a fruit.')
+    
+    for _in word:
+        print('_', end='')
+    print()
+    
+    letterGuessed = ' '
+    chances = len(word) + 2 #mango (5 letters), 7 chances 
+    flag = 0
+    try:
+        while chances > 0 and flag == 0:
+            print()
+            chances -= 1 
+            try:
+                guess = input('Enter a letter to guess:').lower()
+            except:
+                print('Enter only a letter!')
+                continue
+            if not guess.isalpha():
+                print('Enter only a letter')
+                continue
+            elif len(guess) > 1:
+                print('Enter only a single letter!')
+                continue
+            elif guess in letterGuessed:
+                print('You alread guessed that letter!')
+                continue 
+            if guess in word:
+                letterGuessed += guess * word.count(guess)
+                for char in word:
+                    if char in letterGuessed:
+                        print(char, end='')
+                    else:
+                        print('_', end='')
+                        if Counter(letterGuessed) == Counter(word):
+                            print("\nCongratulations! You guessed the word:", word)
+                            flag = 1
+                            break 
+                        if chances <= 0 and 
+                        Counter(letterGuessed) != Counter(word):
+                            print('\n You lost! The word was:', word)
+                        except KeyboardInterrupt:
+                            print('\n Game interrupted. Bye!')
+                            exit()                         
